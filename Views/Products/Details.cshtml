@@ -1,0 +1,79 @@
+@model Demo.Models.Product
+
+@{
+    ViewData["Title"] = "Chi Tiết Sản Phẩm";
+}
+
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col-md-8">
+            <h1>@Model.Name</h1>
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Chỉnh Sửa
+            </a>
+            <a asp-action="Index" class="btn btn-secondary">Quay Lại</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            @if (!string.IsNullOrEmpty(Model.Image))
+            {
+                <img src="@Model.Image" alt="@Model.Name" class="img-fluid rounded shadow-sm" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect fill=%22%23eee%22 width=%22400%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2224%22 fill=%22%23999%22%3EKhông có hình ảnh%3C/text%3E%3C/svg%3E'">
+            }
+            else
+            {
+                <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect fill=%22%23eee%22 width=%22400%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2224%22 fill=%22%23999%22%3EKhông có hình ảnh%3C/text%3E%3C/svg%3E" alt="@Model.Name" class="img-fluid rounded shadow-sm">
+            }
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td><strong>Sản Phẩm ID:</strong></td>
+                            <td>@Model.Id</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tên:</strong></td>
+                            <td>@Model.Name</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Danh Mục:</strong></td>
+                            <td>
+                                <span class="badge bg-info">@Model.Category</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Giá:</strong></td>
+                            <td class="text-danger fs-5">₫@Model.Price.ToString("N0")</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Đánh Giá:</strong></td>
+                            <td>
+                                <span class="text-warning">★ @Model.Rating.ToString("F1")</span>
+                                <small class="text-muted">(@Model.Reviews lượt đánh giá)</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mô Tả:</strong></td>
+                            <td>@Model.Description</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                    <i class="fas fa-edit"></i> Chỉnh Sửa
+                </a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Xóa
+                </a>
+                <a asp-action="Index" class="btn btn-secondary">Quay Lại Danh Sách</a>
+            </div>
+        </div>
+    </div>
+</div>

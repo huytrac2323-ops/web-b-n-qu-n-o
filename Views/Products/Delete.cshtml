@@ -1,0 +1,43 @@
+@model Demo.Models.Product
+
+@{
+    ViewData["Title"] = "Xóa Sản Phẩm";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="text-danger">@ViewData["Title"]</h1>
+            <hr />
+
+            <div class="alert alert-warning">
+                <strong>Cảnh báo!</strong> Bạn sắp xóa sản phẩm này. Hành động này không thể được hoàn tác.
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <img src="@Model.Image" alt="@Model.Name" class="img-fluid rounded">
+                        </div>
+                        <div class="col-md-9">
+                            <h3>@Model.Name</h3>
+                            <p><strong>Danh Mục:</strong> @Model.Category</p>
+                            <p><strong>Giá:</strong> ₫@Model.Price.ToString("N0")</p>
+                            <p><strong>Đánh Giá:</strong> ★ @Model.Rating.ToString("F1") (@Model.Reviews reviews)</p>
+                            <p><strong>Mô Tả:</strong> @Model.Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="Id" />
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+                    <button type="submit" class="btn btn-danger">Xóa Sản Phẩm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

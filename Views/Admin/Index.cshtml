@@ -1,0 +1,342 @@
+@model List<Demo.Models.Agent>
+
+@{
+    ViewData["Title"] = "Analytics Dashboard";
+}
+
+<style>
+    .dashboard-container {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .metric-card {
+        background: white;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .metric-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .metric-icon.orange {
+        background-color: #ffe4cc;
+        color: #ff8c42;
+    }
+
+    .metric-icon.purple {
+        background-color: #e8d4f8;
+        color: #a855f7;
+    }
+
+    .metric-icon.green {
+        background-color: #d1f5d5;
+        color: #4ade80;
+    }
+
+    .metric-value {
+        font-size: 32px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    .metric-label {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    .metric-change {
+        font-size: 12px;
+        color: #999;
+    }
+
+    .metric-change.negative {
+        color: #ef4444;
+    }
+
+    .metric-change.positive {
+        color: #10b981;
+    }
+
+    .portfolio-section {
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        margin-bottom: 30px;
+    }
+
+    .section-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 25px;
+    }
+
+    .report-button {
+        background-color: #1f3a93;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+    .report-button:hover {
+        background-color: #163068;
+    }
+
+    .agents-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .agents-table thead {
+        background-color: #f5f5f5;
+    }
+
+    .agents-table th {
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+        color: #666;
+        font-size: 12px;
+        border-bottom: 2px solid #e5e5e5;
+    }
+
+    .agents-table td {
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+        font-size: 14px;
+    }
+
+    .agent-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 10px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .status-badge.red {
+        background-color: #fee2e2;
+        color: #dc2626;
+    }
+
+    .status-badge.blue {
+        background-color: #dbeafe;
+        color: #2563eb;
+    }
+
+    .status-badge.orange {
+        background-color: #fed7aa;
+        color: #ea580c;
+    }
+
+    .status-badge.green {
+        background-color: #dcfce7;
+        color: #16a34a;
+    }
+
+    .progress-bar-container {
+        background-color: #e5e5e5;
+        border-radius: 4px;
+        height: 6px;
+        overflow: hidden;
+        margin-bottom: 4px;
+    }
+
+    .progress-bar {
+        height: 100%;
+        border-radius: 4px;
+    }
+
+    .progress-bar.red {
+        background-color: #ef4444;
+    }
+
+    .progress-bar.orange {
+        background-color: #f97316;
+    }
+
+    .progress-bar.green {
+        background-color: #10b981;
+    }
+
+    .progress-bar.blue {
+        background-color: #3b82f6;
+    }
+
+    .action-button {
+        background-color: #3b82f6;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        cursor: pointer;
+        margin-right: 5px;
+    }
+
+    .action-button:hover {
+        background-color: #2563eb;
+    }
+
+    .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #e5e5e5;
+    }
+
+    .dashboard-title {
+        font-size: 28px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .dashboard-subtitle {
+        font-size: 13px;
+        color: #999;
+        margin-top: 5px;
+    }
+</style>
+
+<div class="dashboard-container">
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div>
+            <div class="dashboard-title">Bảng Điều Khiển Phân Tích</div>
+            <div class="dashboard-subtitle">Đây là bảng điều khiển phân tích của bạn để có được những thông tin chi tiết toàn diện</div>
+        </div>
+        <button class="report-button">Báo Cáo</button>
+    </div>
+
+    <!-- Portfolio Performance Section -->
+    <div class="portfolio-section">
+        <div class="section-title">Hiệu Suất Danh Mục</div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="metric-card">
+                    <div class="metric-icon orange">📈</div>
+                    <div class="metric-value">1.7M</div>
+                    <div class="metric-label">Tổng Doanh Thu</div>
+                    <div class="metric-change negative">-14.5% doanh thu ít hơn</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="metric-card">
+                    <div class="metric-icon">💵</div>
+                    <div class="metric-value">9M</div>
+                    <div class="metric-label">Phí Tổng Cộng</div>
+                    <div class="metric-change negative">Phí Dev -51%</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="metric-card">
+                    <div class="metric-icon green">💚</div>
+                    <div class="metric-value">$563</div>
+                    <div class="metric-label">Lợi Nhuận Ròng</div>
+                    <div class="metric-change negative">Tăng lên -73%</div>
+                </div>
+            </div>
+        </div>
+        <button class="report-button">Xem Báo Cáo Hoàn Chỉnh</button>
+    </div>
+
+    <!-- Company Agents Status Section -->
+    <div class="portfolio-section">
+        <div class="section-title">Trạng Thái Tác Nhân Công Ty</div>
+        <table class="agents-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Tác Nhân</th>
+                    <th>Tên</th>
+                    <th>Công Ty</th>
+                    <th>Trạng Thái</th>
+                    <th>Ngày Chạy</th>
+                    <th>Mục Tiêu</th>
+                    <th>Hiệu Suất</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var agent in Model)
+            {
+                <tr>
+                    <td>@agent.Id</td>
+                    <td>
+                        <div class="agent-avatar">@agent.Name.Substring(0, 2).ToUpper()</div>
+                    </td>
+                    <td>@agent.Name</td>
+                    <td>@agent.Company</td>
+                    <td>
+                        @if (agent.Status == "Hoạt Động")
+                        {
+                            <span class="status-badge blue">@agent.Status</span>
+                        }
+                        else if (agent.Status == "Không Hoạt Động")
+                        {
+                            <span class="status-badge red">@agent.Status</span>
+                        }
+                        else if (agent.Status == "Đang Chờ")
+                        {
+                            <span class="status-badge orange">@agent.Status</span>
+                        }
+                    </td>
+                    <td>@agent.RunDate?.ToString("d MMMM")</td>
+                    <td>@agent.TargetAmount%</td>
+                    <td>
+                        <div class="progress-bar-container">
+                            @{
+                                var barClass = "blue";
+                                if (agent.Performance < 30) barClass = "red";
+                                else if (agent.Performance < 60) barClass = "orange";
+                                else if (agent.Performance >= 70) barClass = "green";
+                            }
+                            <div class="progress-bar @barClass" style="width: @(agent.Performance)%;"></div>
+                        </div>
+                        @agent.Performance%
+                    </td>
+                    <td><button class="action-button">Xem</button><button class="action-button">Chỉnh Sửa</button></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
