@@ -200,3 +200,8 @@ D:\Demo-main\Demo-main\Demo\bin\Debug\net10.0\Demo.runtimeconfig.json
 D:\Demo-main\Demo-main\Demo\bin\Debug\net10.0\Demo.pdb
 D:\Demo-main\Demo-main\Demo\obj\Debug\net10.0\Demo.genruntimeconfig.cache
 D:\Demo-main\Demo-main\Demo\obj\Debug\net10.0\ref\Demo.dll
+D:\Demo-main\Demo-main\Demo\bin\Debug\net10.0\package-lock.json
+D:\Demo-main\Demo-main\Demo\bin\Debug\net10.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\Demo-main\Demo-main\Demo\bin\Debug\net10.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Demo-main\Demo-main\Demo\bin\Debug\net10.0\Newtonsoft.Json.dll
+D:\Demo-main\Demo-main\Demo\bin\Debug\net10.0\Newtonsoft.Json.Bson.dll

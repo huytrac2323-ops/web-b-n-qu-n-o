@@ -1,0 +1,35 @@
+@model Demo.Models.Customer
+
+@{
+    ViewData["Title"] = "Customer Details";
+}
+
+<h1>Customer Details</h1>
+
+<div>
+    <h4>@Model.Name</h4>
+    <dl class="row">
+        <dt class="col-sm-2">Email</dt>
+        <dd class="col-sm-10">@Model.Email</dd>
+        <dt class="col-sm-2">Phone</dt>
+        <dd class="col-sm-10">@Model.Phone</dd>
+        <dt class="col-sm-2">Group</dt>
+        <dd class="col-sm-10">@Model.Group?.Name</dd>
+    </dl>
+
+    <h5>Addresses <a asp-controller="CustomerAddresses" asp-action="Create" asp-route-customerId="@Model.Id" class="btn btn-sm btn-success ms-2">Add Address</a></h5>
+    <ul>
+    @foreach (var a in Model.Addresses)
+    {
+        <li>
+            @a.AddressLine, @a.City, @a.Country (@(a.IsPrimary ? "Primary" : ""))
+            <span class="ms-2">[ <a asp-controller="CustomerAddresses" asp-action="Edit" asp-route-id="@a.Id">Edit</a> | <a asp-controller="CustomerAddresses" asp-action="Delete" asp-route-id="@a.Id">Delete</a> ]</span>
+        </li>
+    }
+    </ul>
+
+    <p>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+        <a asp-action="Index" class="btn btn-secondary">Back to list</a>
+    </p>
+</div>

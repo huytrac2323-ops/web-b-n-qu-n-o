@@ -98,220 +98,167 @@ namespace Demo.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Demo.Models.Product", b =>
+            modelBuilder.Entity("Demo.Models.Customer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint")
+                        .HasColumnName("CustomerId");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("Category")
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CustomerGroupId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerGroupId");
+
+                    b.ToTable("Customers", (string)null);
+                });
+
+            modelBuilder.Entity("Demo.Models.CustomerAddress", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("CustomerAddressId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("AddressLine")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<long>("CustomerId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsPrimary")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("CustomerAddresses", (string)null);
+                });
+
+            modelBuilder.Entity("Demo.Models.CustomerGroup", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("CustomerGroupId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Rating")
-                        .HasColumnType("float");
-
-                    b.Property<int>("Reviews")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("CustomerGroups", (string)null);
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Category = "Flash Sale",
-                            Description = "Áo phông trắng cơ bản, thoải mái và dễ kết hợp",
-                            Image = "https://via.placeholder.com/200/ffffff/000000?text=Áo+Phông+Trắng",
-                            Name = "Áo Phông Trắng",
-                            Price = 199000.0,
-                            Rating = 4.7999999999999998,
-                            Reviews = 24
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Category = "Flash Sale",
-                            Description = "Quần shorts jean mát mẻ, phù hợp cho mùa hè",
-                            Image = "https://via.placeholder.com/200/0066cc/ffffff?text=Quần+Shorts",
-                            Name = "Quần Shorts Jean",
-                            Price = 299000.0,
-                            Rating = 4.9000000000000004,
-                            Reviews = 18
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Category = "Flash Sale",
-                            Description = "Áo khoác denim bền bỉ và thời trang",
-                            Image = "https://via.placeholder.com/200/663300/ffffff?text=Áo+Khoác",
-                            Name = "Áo Khoác Denim",
-                            Price = 499000.0,
-                            Rating = 4.7000000000000002,
-                            Reviews = 32
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Category = "Flash Sale",
-                            Description = "Áo crop top xanh nước biển, trẻ trung và gợi cầm",
-                            Image = "https://via.placeholder.com/200/0099ff/ffffff?text=Crop+Top",
-                            Name = "Áo Crop Top Xanh",
-                            Price = 249000.0,
-                            Rating = 5.0,
-                            Reviews = 15
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Category = "Trend Luxe",
-                            Description = "Áo vest đen cao cấp, phù hợp cho các sự kiện chính thức",
-                            Image = "https://via.placeholder.com/200/333333/ffffff?text=Áo+Vest",
-                            Name = "Áo Vest Đen",
-                            Price = 799000.0,
-                            Rating = 4.9000000000000004,
-                            Reviews = 45
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Category = "Trend Luxe",
-                            Description = "Váy trắng dự tiệc elegant, làm nổi bật vẻ đẹp",
-                            Image = "https://via.placeholder.com/200/f0f0f0/000000?text=Váy+Trắng",
-                            Name = "Váy Trắng Dự Tiệc",
-                            Price = 899000.0,
-                            Rating = 5.0,
-                            Reviews = 38
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Category = "Trend Luxe",
-                            Description = "Áo sơ mi lụa mịn, có phần mềm mại và thoáng khí",
-                            Image = "https://via.placeholder.com/200/cccccc/666666?text=Áo+Sơ+Mi",
-                            Name = "Áo Sơ Mi Lụa",
-                            Price = 699000.0,
-                            Rating = 4.7999999999999998,
-                            Reviews = 28
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Category = "Trend Luxe",
-                            Description = "Quần tây xám đơn giản, dễ kết hợp với nhiều áo",
-                            Image = "https://via.placeholder.com/200/808080/ffffff?text=Quần+Tây",
-                            Name = "Quần Tây Xám",
-                            Price = 599000.0,
-                            Rating = 4.7000000000000002,
-                            Reviews = 22
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Category = "Hot Trend",
-                            Description = "Áo len đen ấm áp, thích hợp cho những ngày lạnh",
-                            Image = "https://via.placeholder.com/200/1a1a1a/ffffff?text=Áo+Len",
-                            Name = "Áo Len Đen",
-                            Price = 349000.0,
-                            Rating = 4.9000000000000004,
-                            Reviews = 51
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Category = "Hot Trend",
-                            Description = "Váy đen midi kinh điển, phù hợp múi lạnh hàng ngày",
-                            Image = "https://via.placeholder.com/200/2d2d2d/ffffff?text=Váy+Midi",
-                            Name = "Váy Đen Midi",
-                            Price = 459000.0,
-                            Rating = 4.7999999999999998,
-                            Reviews = 42
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Category = "Hot Trend",
-                            Description = "Áo trắng nữ đơn giản nhưng sang trọng",
-                            Image = "https://via.placeholder.com/200/ffffff/000000?text=Áo+Trắng",
-                            Name = "Áo Trắng Nữ",
-                            Price = 249000.0,
-                            Rating = 5.0,
-                            Reviews = 67
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Category = "Hot Trend",
-                            Description = "Áo đỏ dự tiệc nổi bật, tự tin trong các dịp đặc biệt",
-                            Image = "https://via.placeholder.com/200/cc0000/ffffff?text=Áo+Đỏ",
-                            Name = "Áo Đỏ Dự Tiệc",
-                            Price = 549000.0,
-                            Rating = 4.9000000000000004,
-                            Reviews = 38
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Category = "Thời Trang Nam",
-                            Description = "Quần jeans nam bền bỉ, dễ mix and match",
-                            Image = "https://via.placeholder.com/200/003d7a/ffffff?text=Quần+Jeans",
-                            Name = "Quần Jeans Nam",
-                            Price = 379000.0,
-                            Rating = 4.7999999999999998,
-                            Reviews = 55
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Category = "Thời Trang Nam",
-                            Description = "Áo sơ mi nam chất lượng, thích hợp cho công sở",
-                            Image = "https://via.placeholder.com/200/ffffff/000000?text=Áo+Sơ+Mi",
-                            Name = "Áo Sơ Mi Nam",
-                            Price = 299000.0,
-                            Rating = 4.7000000000000002,
-                            Reviews = 33
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Category = "Thời Trang Nam",
-                            Description = "Áo khoác nam ấm áp và thời trang",
-                            Image = "https://via.placeholder.com/200/4d4d4d/ffffff?text=Áo+Khoác",
-                            Name = "Áo Khoác Nam",
-                            Price = 599000.0,
-                            Rating = 4.9000000000000004,
-                            Reviews = 48
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Category = "Thời Trang Nam",
-                            Description = "Quần tây nam sang trọng, phù hợp cho các dịp quan trọng",
-                            Image = "https://via.placeholder.com/200/333333/ffffff?text=Quần+Tây",
-                            Name = "Quần Tây Nam",
-                            Price = 449000.0,
-                            Rating = 4.7999999999999998,
-                            Reviews = 29
-                        });
+            modelBuilder.Entity("Demo.Models.Product", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("ProductID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("BaseUnitId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("BaseUnitID");
+
+                    b.Property<long?>("CategoryId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("CategoryID");
+
+                    b.Property<long>("CompanyId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("CompanyID");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreatedAt");
+
+                    b.Property<long?>("DefaultTaxRateId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("DefaultTaxRateID");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit")
+                        .HasColumnName("IsActive");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ProductName");
+
+                    b.Property<string>("ProductCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(max)")
+                        .HasColumnName("ProductCode");
+
+                    b.Property<long>("ProductTypeId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("ProductTypeID");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Demo.Models.User", b =>
@@ -337,6 +284,32 @@ namespace Demo.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Demo.Models.Customer", b =>
+                {
+                    b.HasOne("Demo.Models.CustomerGroup", "Group")
+                        .WithMany()
+                        .HasForeignKey("CustomerGroupId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Group");
+                });
+
+            modelBuilder.Entity("Demo.Models.CustomerAddress", b =>
+                {
+                    b.HasOne("Demo.Models.Customer", "Customer")
+                        .WithMany("Addresses")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Demo.Models.Customer", b =>
+                {
+                    b.Navigation("Addresses");
                 });
 #pragma warning restore 612, 618
         }

@@ -26,7 +26,7 @@ namespace Demo.Controllers
         }
 
         // GET: Products/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
             {
@@ -92,7 +92,7 @@ namespace Demo.Controllers
         }
 
         // GET: Products/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
             {
@@ -110,7 +110,7 @@ namespace Demo.Controllers
         // POST: Products/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Category,Rating,Reviews,Description")] Product product, IFormFile imageFile)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,Name,Price,Category,Rating,Reviews,Description")] Product product, IFormFile imageFile)
         {
             if (id != product.Id)
             {
@@ -171,7 +171,7 @@ namespace Demo.Controllers
         }
 
         // GET: Products/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
             {
@@ -190,7 +190,7 @@ namespace Demo.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(long id)
         {
             var product = await _context.Products.FindAsync(id);
             if (product != null)
@@ -203,7 +203,7 @@ namespace Demo.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductExists(int id)
+        private bool ProductExists(long id)
         {
             return _context.Products.Any(e => e.Id == id);
         }
