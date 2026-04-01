@@ -2456,11 +2456,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Demo-main\\Demo-main\\Demo\\Demo.csproj",
+      "projectUniqueName": "D:\\Demo-main\\Demo.csproj",
       "projectName": "Demo",
-      "projectPath": "D:\\Demo-main\\Demo-main\\Demo\\Demo.csproj",
+      "projectPath": "D:\\Demo-main\\Demo.csproj",
       "packagesPath": "C:\\Users\\acer\\.nuget\\packages\\",
-      "outputPath": "D:\\Demo-main\\Demo-main\\Demo\\obj\\",
+      "outputPath": "D:\\Demo-main\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\acer\\AppData\\Roaming\\NuGet\\NuGet.Config"
