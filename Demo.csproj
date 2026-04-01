@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Exclude copied demo source folders to avoid duplicate types when root is compiled -->
+    <Compile Remove="Demo\**\*.cs" />
+    <Compile Remove="Demo-master\**\*.cs" />
+    <Compile Remove="**\obj\**\*.cs" />
+    <Compile Remove="**\bin\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
