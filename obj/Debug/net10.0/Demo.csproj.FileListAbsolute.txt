@@ -205,3 +205,16 @@ D:\Demo-main\Demo-main\Demo\bin\Debug\net10.0\Microsoft.AspNetCore.JsonPatch.dll
 D:\Demo-main\Demo-main\Demo\bin\Debug\net10.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 D:\Demo-main\Demo-main\Demo\bin\Debug\net10.0\Newtonsoft.Json.dll
 D:\Demo-main\Demo-main\Demo\bin\Debug\net10.0\Newtonsoft.Json.Bson.dll
+D:\Demo-main\obj\Debug\net10.0\Demo.csproj.AssemblyReference.cache
+D:\Demo-main\obj\Debug\net10.0\rpswa.dswa.cache.json
+D:\Demo-main\obj\Debug\net10.0\Demo.GeneratedMSBuildEditorConfig.editorconfig
+D:\Demo-main\obj\Debug\net10.0\Demo.AssemblyInfoInputs.cache
+D:\Demo-main\obj\Debug\net10.0\Demo.AssemblyInfo.cs
+D:\Demo-main\obj\Debug\net10.0\Demo.csproj.CoreCompileInputs.cache
+D:\Demo-main\obj\Debug\net10.0\Demo.MvcApplicationPartsAssemblyInfo.cache
+D:\Demo-main\obj\Debug\net10.0\Demo.RazorAssemblyInfo.cache
+D:\Demo-main\obj\Debug\net10.0\Demo.RazorAssemblyInfo.cs
+D:\Demo-main\obj\Debug\net10.0\Demo.sourcelink.json
+D:\Demo-main\obj\Debug\net10.0\Demo.dll
+D:\Demo-main\obj\Debug\net10.0\refint\Demo.dll
+D:\Demo-main\obj\Debug\net10.0\Demo.pdb
