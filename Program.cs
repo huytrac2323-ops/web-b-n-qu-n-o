@@ -10,6 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication("MyCookieAuth").AddCookie("MyCookieAuth", options =>
 {
     options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccessDenied";
 });
 
 // Add EF Core SQL Server

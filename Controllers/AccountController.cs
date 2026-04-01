@@ -42,7 +42,14 @@ namespace Demo.Controllers
                 var identity = new ClaimsIdentity(claims, "MyCookieAuth");
                 var principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync("MyCookieAuth", principal);
-                return RedirectToAction("Index", "Admin");
+
+                // Redirect to Admin only for Admin role; otherwise, đi Home
+                if (claims.Any(c => c.Type == ClaimTypes.Role && c.Value == "Admin"))
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+
+                return RedirectToAction("Index", "Home");
             }
 
             ViewBag.Error = "Sai tài khoản hoặc mật khẩu";
@@ -53,6 +60,11 @@ namespace Demo.Controllers
         {
             await HttpContext.SignOutAsync("MyCookieAuth");
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
 
         public IActionResult Register()
